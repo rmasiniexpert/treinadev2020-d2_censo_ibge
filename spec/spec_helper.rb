@@ -1,6 +1,5 @@
 # frozen_string_literal: true
---color
---format=documentation
+
 require 'active_support/all'
 PROJECT_ROOT = File.expand_path('..', __dir__)
 
