@@ -1,19 +1,31 @@
-require 'messages'
+require './lib/messages'
 class Censo
   attr_reader :messages
-  def initialize
+  attr_accessor :input
+
+  def initialize(input: 0)
     @messages = Messages.new
-    # @output = output
+    @input = input
   end
   
   def start
-    # input = @input.gets
-    # puts "Bem-vindo a aplicação"
-    # puts "Ola"
     @messages.welcome
     # puts ''
-    puts 'Selecione qual consulta você quer fazer:'
-    # a = gets
+    loop do
+      @messages.select_consult
+      @input = gets.to_i
+
+      if @input < 4 && @input >= 0 
+        break
+      begin
+        puts
+      rescue => exception
+        
+      else
+        
+      end
+      end
+    end
   end
 
 # puts 'digite 2 valores'
