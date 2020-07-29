@@ -10,26 +10,29 @@ class Censo
   
   def start
     @messages.welcome
-    # puts ''
     loop do
       @messages.select_consult
+      puts 'Digite um número: '
       @input = gets.to_i
 
-      if @input < 4 && @input >= 0 
+      if @input < 4 || @input >= 0 
+        consult(@input)
         break
-      begin
-        puts
-      rescue => exception
-        
-      else
-        
-      end
       end
     end
   end
 
-# puts 'digite 2 valores'
-# a = gets 
-# b = gets
-# puts "O resultado eh: #{a.to_i + b.to_i}"
+  def consult(consult)
+    if consult == 1
+      puts 'Consulta de Ranking dos nomes mais comuns da UF'
+    elsif consult == 2
+      puts 'Consulta de Ranking dos nomes mais comuns da cidade'
+    elsif consult == 3
+      puts 'Frequência do uso do nome ao longo dos anos'
+    elsif consult == 0
+      puts 'Tchau'
+    else
+      puts 'Valor inválido, digite apena um número da tabela'
+    end
+  end
 end
