@@ -16,7 +16,7 @@ class Censo
       @input = gets.to_i
 
       consult(@input)
-      if @input < 4 && @input >= 0 
+      if @input == 0 
         break
       end
     end
