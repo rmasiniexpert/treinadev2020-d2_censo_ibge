@@ -12,11 +12,11 @@ class Censo
     @messages.welcome
     loop do
       @messages.select_consult
-      puts 'Digite um número: '
+      print 'Digite um número: '
       @input = gets.to_i
 
-      if @input < 4 || @input >= 0 
-        consult(@input)
+      consult(@input)
+      if @input < 4 && @input >= 0 
         break
       end
     end
@@ -24,15 +24,15 @@ class Censo
 
   def consult(consult)
     if consult == 1
-      puts 'Consulta de Ranking dos nomes mais comuns da UF'
+      puts "\n\nConsulta de Ranking dos nomes mais comuns da UF\n\n"
     elsif consult == 2
-      puts 'Consulta de Ranking dos nomes mais comuns da cidade'
+      puts "\n\nConsulta de Ranking dos nomes mais comuns da cidade\n\n"
     elsif consult == 3
-      puts 'Frequência do uso do nome ao longo dos anos'
+      puts "\n\nFrequência do uso do nome ao longo dos anos\n\n"
     elsif consult == 0
-      puts 'Tchau'
+      puts "\n\nObrigado por utilizar a aplicação. Até a próxima\n\n"
     else
-      puts 'Valor inválido, digite apena um número da tabela'
+      puts "\n\nValor inválido, digite apena um número da tabela\n\n"
     end
   end
 end
