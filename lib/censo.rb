@@ -1,40 +1,47 @@
 require './lib/messages'
+require './lib/uf'
 class Censo
-  attr_reader :messages
+  attr_reader :messages, :uf
   attr_accessor :input
 
   def initialize(input: 0)
     @messages = Messages.new
+    @uf = Uf.new
     @input = input
   end
   
   def start
     @messages.welcome
     loop do
-      @messages.select_consult
+      @messages.select_query
       print 'Digite um número: '
       @input = gets.to_i
-
-      consult(@input)
-      if @input == 0 
+      query(@input)
+      if @input == 4
         break
       end
     end
   end
 
-  def consult(consult)
-    if consult == 1
-      puts "\n\nConsulta de Ranking dos nomes mais comuns da UF\n\n"
-    elsif consult == 2
-      puts "\n\nConsulta de Ranking dos nomes mais comuns da cidade\n\n"
-    elsif consult == 3
-      puts "\n\nFrequência do uso do nome ao longo dos anos\n\n"
-    elsif consult == 0
+  def query(query)
+    if query == 1
+      @messages.message_query_selected(query)
+      query_with_uf
+    elsif query == 2
+      @messages.message_query_selected(query)
+    elsif query == 3
+      @messages.message_query_selected(query)
+    elsif query == 4
       puts "\n\nObrigado por utilizar a aplicação. Até a próxima\n\n"
     else
       puts "\n\nValor inválido, digite apena um número da tabela\n\n"
     end
   end
 
-  # def 
+  def query_with_uf
+    puts "Carregando..."
+    @uf.exibe("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+    # print "Digite a UF que deseja buscar os nomes comuns: "
+    # gets.upcase.chomp
+  end
 end
