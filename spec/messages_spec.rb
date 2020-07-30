@@ -19,14 +19,20 @@ describe Messages do
   context 'query selected message' do
     it 'query 1' do
       expect{Messages.new.message_query_selected(1)}.to output(/Consulta de Ranking dos nomes mais comuns da UF/).to_stdout
-    end
+      expect{Messages.new.message_query_selected(1)}.not_to output(/Consulta de Ranking dos nomes mais comuns da cidade/).to_stdout
+      expect{Messages.new.message_query_selected(1)}.not_to output(/Frequência do uso do nome ao longo dos anos/).to_stdout
+      end
     
     it 'query 2' do
       expect{Messages.new.message_query_selected(2)}.to output(/Consulta de Ranking dos nomes mais comuns da cidade/).to_stdout
+      expect{Messages.new.message_query_selected(2)}.not_to output(/Consulta de Ranking dos nomes mais comuns da UF/).to_stdout
+      expect{Messages.new.message_query_selected(2)}.not_to output(/Frequência do uso do nome ao longo dos anos/).to_stdout
     end
     
     it 'query 3' do
       expect{Messages.new.message_query_selected(3)}.to output(/Frequência do uso do nome ao longo dos anos/).to_stdout
+      expect{Messages.new.message_query_selected(3)}.not_to output(/Consulta de Ranking dos nomes mais comuns da UF/).to_stdout
+      expect{Messages.new.message_query_selected(3)}.not_to output(/Consulta de Ranking dos nomes mais comuns da cidade/).to_stdout
     end
   end
 end
