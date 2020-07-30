@@ -35,4 +35,6 @@ class Censo
       puts "\n\nValor inválido, digite apena um número da tabela\n\n"
     end
   end
+
+  # def 
 end
