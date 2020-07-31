@@ -5,13 +5,7 @@ describe Name do
                 [ {"nome": "MARIA", "frequencia": 146770, "ranking": 1},
                   {"nome": "JOSE", "frequencia": 53505, "ranking": 2 },
                   {"nome": "ANA", "frequencia": 49963, "ranking": 3 },
-                  {"nome": "JOAO", "frequencia": 38398, "ranking": 4 },
-                  {"nome": "ANTONIO",  "frequencia": 28739, "ranking": 5 },
-                  {"nome": "FRANCISCO", "frequencia": 25426, "ranking": 6 },
-                  {"nome": "PEDRO", "frequencia": 21347, "ranking": 7 },
-                  {"nome": "CARLOS", "frequencia": 20310, "ranking": 8 },
-                  {"nome": "PAULO", "frequencia": 19379, "ranking": 9 },
-                  {"nome": "LUCAS", "frequencia": 19258, "ranking": 10 },
+                  {"nome": "JOAO", "frequencia": 38398, "ranking": 4 }
                 ]}]}
   let(:body_f) {[{"localidade": "53", "sexo": "null", "res":
                 [ {"nome": "MARIA", "frequencia": 146770, "ranking": 1},
@@ -32,13 +26,7 @@ describe Name do
              [ {"nome": "CAROL", "frequencia": 11734129, "ranking": 1 },
                 {"nome": "JOSE", "frequencia": 5754529, "ranking": 2 },
                 {"nome": "ANA", "frequencia": 3089858, "ranking": 3  },
-                {"nome": "JOAO", "frequencia": 2984119, "ranking": 4 },
-                {"nome": "ANTONIO", "frequencia": 2576348, "ranking": 5 },
-                {"nome": "FRANCISCO","frequencia": 1772197,"ranking": 6 },
-                {"nome": "CARLOS","frequencia": 1489191,"ranking": 7 },
-                {"nome": "PAULO","frequencia": 1423262,"ranking": 8 },
-                {"nome": "PEDRO","frequencia": 1219605,"ranking": 9 },
-                {"nome": "LUCAS","frequencia": 1127310,"ranking": 10 }
+                {"nome": "JOAO", "frequencia": 2984119, "ranking": 4 }
              ]}]}
   let(:base) {"https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking"}
   let(:headers) {{'Accept'=>'*/*',
