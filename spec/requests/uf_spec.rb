@@ -24,13 +24,34 @@ describe Uf do
     expect(response_body[1][:sigla]).to include('DF')
   end
 
-  it 'Show response body' do
+  it 'Show the All Ufs' do
+    stub_request(:get, base).with(headers: headers).
+         to_return(status: 200, body: body.to_json, headers: {})
+    uf = Uf.new
+    response = Faraday.get(base)
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    expect{uf.show_ufs(response_body)}.to output(/Distrito Federal/).to_stdout
+    expect{uf.show_ufs(response_body)}.to output(/DF/).to_stdout
+    expect{uf.show_ufs(response_body)}.to output(/Rondônia/).to_stdout
+    expect{uf.show_ufs(response_body)}.to output(/RO/).to_stdout
+  end
+
+  it 'Input UF correctly' do
+    allow_any_instance_of(Uf).to receive(:gets).and_return('RO')
     stub_request(:get, base).with(headers: headers).
          to_return(status: 200, body: body.to_json, headers: {})
 
-    expect{Uf.new.exibe(base)}.to output(/Distrito Federal/).to_stdout
-    expect{Uf.new.exibe(base)}.to output(/DF/).to_stdout
-    expect{Uf.new.exibe(base)}.to output(/Rondônia/).to_stdout
-    expect{Uf.new.exibe(base)}.to output(/RO/).to_stdout
+    uf = Uf.new
+    response = Faraday.get(base)
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    expect(uf.select_Uf(response_body)[1]).to eq (11)
+    expect(uf.select_Uf(response_body)[0]).to eq ('RO')
+    expect{uf.select_Uf(response_body)[1]}.to output(/Digite a UF que deseja buscar os nomes comuns: /).to_stdout
+    expect(uf.select_Uf(response_body)[1]).not_to eq (53)
+    expect(uf.select_Uf(response_body)[0]).not_to eq ('DF')
+
   end
+
 end

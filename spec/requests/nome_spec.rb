@@ -66,20 +66,9 @@ describe Nome do
     stub_request(:get, "#{base}?localidade=53").with(headers: headers).
          to_return(status: 200, body: body_df.to_json, headers: {})
 
-    expect{Nome.new.exibe(base, 53)}.to output(/MARIA/).to_stdout
-    expect{Nome.new.exibe(base, 53)}.to output(/146770/).to_stdout
-    expect{Nome.new.exibe(base, 53)}.not_to output(/CAROL/).to_stdout
-    expect{Nome.new.exibe(base, 53)}.not_to output(/11734129/).to_stdout
-    expect{Nome.new.exibe(base, 53)}.not_to output(/UF não encontrado/).to_stdout
-  end
-
-  it 'Show response body' do
-    stub_request(:get, "#{base}?localidade=53").with(headers: headers).
-         to_return(status: 404, body: body_df.to_json, headers: {})
-
-    expect{Nome.new.exibe(base, 53)}.to output(/UF não encontrado/).to_stdout
-    # expect{Nome.new.exibe(base, 53)}.to output(/MARIA/).to_stdout
-    expect{Nome.new.exibe(base, 53)}.not_to output(/146770/).to_stdout
-    expect{Nome.new.exibe(base, 53)}.not_to output(/146770/).to_stdout
+    expect{Nome.new.show(base, 53)}.to output(/MARIA/).to_stdout
+    expect{Nome.new.show(base, 53)}.to output(/146770/).to_stdout
+    expect{Nome.new.show(base, 53)}.not_to output(/CAROL/).to_stdout
+    expect{Nome.new.show(base, 53)}.not_to output(/11734129/).to_stdout
   end
 end

@@ -1,5 +1,6 @@
 require './lib/messages'
 require './lib/uf'
+require './lib/nome'
 class Censo
   attr_reader :messages, :uf
   attr_accessor :input
@@ -7,6 +8,7 @@ class Censo
   def initialize(input: 0)
     @messages = Messages.new
     @uf = Uf.new
+    @nome = Nome.new
     @input = input
   end
   
@@ -40,8 +42,7 @@ class Censo
 
   def query_with_uf
     puts "Carregando..."
-    @uf.exibe("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-    # print "Digite a UF que deseja buscar os nomes comuns: "
-    # gets.upcase.chomp
+    @input = @uf.select_uf_id("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+    @nome.exibe("https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking", @input)
   end
 end

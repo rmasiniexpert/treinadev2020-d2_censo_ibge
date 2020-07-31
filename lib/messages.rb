@@ -39,8 +39,8 @@ class Messages
     headings <<  ['                     Selecione uma consulta                      ']
     rows << ["                     1- Nomes comuns por UF                           "]
     rows << ["                     2- Nomes comuns por cidade                       "]
-    rows << ["                     3- frequência do uso do nome                     "]
-    rows << ["                     4- sair                      "]
+    rows << ["                     3- Frequência do uso do nome                     "]
+    rows << ["                     4- Sair                      "]
     table = Terminal::Table.new(rows: rows, headings: headings)
   end
 end

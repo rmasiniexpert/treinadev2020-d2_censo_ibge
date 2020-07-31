@@ -11,7 +11,6 @@ describe Censo do
     it 'see query options' do
       censo = Censo.new
       allow(censo).to receive(:gets).and_return('4')
-
       expect{censo.start}.to output(/Selecione uma consulta/).to_stdout
     end
   end
@@ -43,8 +42,8 @@ describe Censo do
 
       expect{censo.start}.to output(/1- Nomes comuns por UF/).to_stdout
       expect{censo.start}.to output(/2- Nomes comuns por cidade/).to_stdout
-      expect{censo.start}.to output(/3- frequência do uso do nome/).to_stdout
-      expect{censo.start}.to output(/4- sair/).to_stdout
+      expect{censo.start}.to output(/3- Frequência do uso do nome/).to_stdout
+      expect{censo.start}.to output(/4- Sair/).to_stdout
       expect{censo.start}.to output(/Digite um número: /).to_stdout
       expect{censo.start}.to output(/Obrigado por utilizar a aplicação. Até a próxima/).to_stdout
     end

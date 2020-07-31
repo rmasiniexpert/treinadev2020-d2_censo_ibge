@@ -12,8 +12,8 @@ describe Messages do
 
     expect{messages.select_query}.to output(/1- Nomes comuns por UF/).to_stdout
     expect{messages.select_query}.to output(/2- Nomes comuns por cidade/).to_stdout
-    expect{messages.select_query}.to output(/3- frequência do uso do nome/).to_stdout
-    expect{messages.select_query}.to output(/4- sair/).to_stdout
+    expect{messages.select_query}.to output(/3- Frequência do uso do nome/).to_stdout
+    expect{messages.select_query}.to output(/4- Sair/).to_stdout
   end
 
   context 'query selected message' do
