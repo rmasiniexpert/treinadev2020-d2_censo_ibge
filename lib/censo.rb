@@ -1,15 +1,17 @@
-require './lib/messages'
+require './lib/city'
 require './lib/uf'
 require './lib/name'
+require './lib/messages'
 class Censo
   attr_reader :messages, :uf
   attr_accessor :input
 
   def initialize(input: 0)
-    @messages = Messages.new
+    @city = City.new
+    @input = input
     @uf = Uf.new
     @name = Name.new
-    @input = input
+    @messages = Messages.new
   end
   
   def start
@@ -31,6 +33,7 @@ class Censo
       query_with_uf
     elsif query == 2
       @messages.message_query_selected(query)
+      query_with_city
     elsif query == 3
       @messages.message_query_selected(query)
     elsif query == 4
@@ -44,6 +47,19 @@ class Censo
     puts "Carregando..."
     @input = @uf.select_uf_id("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
     @messages.message_table_name
+    @name.show(base: "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking", local: @input)
+    @messages.message_table_female_name
+    @name.show(base: "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking", local: @input, gender: 'f')
+    @messages.message_table_male_name
+    @name.show(base: "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking", local: @input, gender: 'm')
+    @messages.message_end_query
+  end
+
+  def query_with_city
+    puts "Carregando..."
+    @input = @uf.select_uf_id("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+    @messages.message_table_name
+    @input = @city.select_city_id("https://servicodados.ibge.gov.br/api/v1/localidades/estados", @input)
     @name.show(base: "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking", local: @input)
     @messages.message_table_female_name
     @name.show(base: "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking", local: @input, gender: 'f')

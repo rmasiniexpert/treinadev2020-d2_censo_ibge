@@ -9,7 +9,7 @@ class Uf
     response_body = JSON.parse(response.body, symbolize_names: true)
     table = show_ufs(response_body)
     loop do
-      uf_id = select_Uf(response_body)
+      uf_id = select_uf(response_body)
       unless uf_id[1].nil?
         break
       end
@@ -34,7 +34,7 @@ class Uf
     table
   end
 
-  def select_Uf(response_body)
+  def select_uf(response_body)
     aux = []
     print "Digite a UF que deseja buscar os nomes comuns: "
     input = gets.upcase.chomp
