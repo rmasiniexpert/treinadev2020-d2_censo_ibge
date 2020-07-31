@@ -3,47 +3,48 @@ require 'json'
 require 'terminal-table'
 class City
 
-  def select_city_id(url)
-    uf_id = []
-    response = Faraday.get(url)
+  def select_city_id(url, local)
+    city_id = []
+    response = Faraday.get("#{url}/#{local}/municipios")
     response_body = JSON.parse(response.body, symbolize_names: true)
-    table = show_ufs(response_body)
+    table = show_cities(response_body)
     loop do
-      uf_id = select_Uf(response_body)
-      unless uf_id[1].nil?
+      city_id = select_city(response_body)
+      unless city_id[2].nil?
         break
       end
       puts "\n=================================================="
-      puts "\n\nValor inválido, digite uma UF da tabela\n\n"
+      puts "\n\nValor inválido, digite uma opção da tabela\n\n"
       puts table
     end
     puts "\n==================================================\n"
-    puts "\n\nBuscando Tabelas de ranking dos nomes comuns em #{uf_id[0]}"
-    uf_id[1]
+    puts "\n\nBuscando Tabelas de ranking dos nomes comuns em #{city_id[2]}"
+    city_id[1]
   end
 
-  def show_ufs(response_body)
+  def select_city(response_body)
+    aux = []
+    print "Digite o NÚMERO DA OPÇÃO da Cidade que deseja buscar os nomes comuns: "
+    input = -1 + gets.to_i
+    if input >= 0 && input < response_body.count
+      aux << input
+      aux << response_body[input][:id]
+      aux << response_body[input][:nome]
+    end
+    aux
+  end
+
+  def show_cities(response_body)
     rows = []
     headings = []
-    headings <<  ['UF', 'Nome do Estado']
-    response_body.each do |uf|
-      rows << [uf[:sigla], uf[:nome]]
+    cont = 1
+    headings <<  ['Opção', 'Nome da Cidade']
+    response_body.each do |city|
+      rows << [cont, city[:nome]]
+      cont += 1
     end
     table = Terminal::Table.new(rows: rows, headings: headings)
     puts table
     table
-  end
-
-  def select_City(response_body)
-    aux = []
-    print "Digite a UF que deseja buscar os nomes comuns: "
-    input = gets.upcase.chomp
-    response_body.each do |uf|
-      if uf[:sigla] == input
-        aux << input
-        aux << uf[:id]
-      end
-    end
-    aux
   end
 end
