@@ -23,6 +23,27 @@ class Messages
     end
   end
 
+  def message_table_name
+    puts "\n\n=================================================="
+    puts "\n\nRanking dos nomes mais comuns\n\n"
+  end
+
+  def message_table_female_name
+    puts "\n\n=================================================="
+    puts "\n\nRanking dos nomes femininos mais comuns\n\n"
+  end
+
+  def message_table_male_name
+    puts "\n\n=================================================="
+    puts "\n\nRanking dos nomes masculinos mais comuns\n\n"
+  end
+
+  def message_end_query
+    puts "\n\n==================================================\n\n"
+    puts "\nConsulta Encerrada\n"
+    puts "\n\n==================================================\n\n"
+  end
+
   private 
 
   def set_table_welcome

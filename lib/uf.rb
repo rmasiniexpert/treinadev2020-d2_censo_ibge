@@ -13,11 +13,12 @@ class Uf
       unless uf_id[1].nil?
         break
       end
-      puts "\n=============================================="
+      puts "\n=================================================="
       puts "\n\nValor inválido, digite uma UF da tabela\n\n"
       puts table
     end
-    puts "\n\nTabela do Ranking dos nomes comuns em #{uf_id[0]}\n\n"
+    puts "\n==================================================\n"
+    puts "\n\nBuscando Tabelas de ranking dos nomes comuns em #{uf_id[0]}"
     uf_id[1]
   end
 
