@@ -17,6 +17,8 @@ Para utilizar o projeto é necessário:
 
 #### Consulta de nomes comuns por Município
 
+#### Consulta de frequência do uso dos nomes
+
 ## Referências
 1. [API de Localidades](https://servicodados.ibge.gov.br/api/docs/localidades?versao=1)
 2. [API de Nomes](https://servicodados.ibge.gov.br/api/docs/censos/nomes?versao=2)
