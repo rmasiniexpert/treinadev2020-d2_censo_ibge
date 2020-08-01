@@ -17,13 +17,13 @@ class Name
     end
     rows = []
     headings = []
+    ranking = 1
     headings <<  ['Ranking', 'Nome', 'Frequência do nome']
     response = Faraday.get(url)
     response_body = JSON.parse(response.body, symbolize_names: true)
     response_body[0][:res].each do |uf|
-      rows << [uf[:ranking],
-              uf[:nome],
-              uf[:frequencia]]
+      rows << [ranking, uf[:nome], uf[:frequencia]]
+      ranking += 1
     end
     table = Terminal::Table.new(rows: rows, headings: headings)
     puts table

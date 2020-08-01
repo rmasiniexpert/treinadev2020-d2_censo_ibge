@@ -2,12 +2,14 @@ require './lib/city'
 require './lib/uf'
 require './lib/name'
 require './lib/messages'
+require './lib/frequency_names'
 class Censo
   attr_reader :messages, :uf
   attr_accessor :input
 
   def initialize(input: 0)
     @city = City.new
+    @frequency_names = FrequencyNames.new
     @input = input
     @uf = Uf.new
     @name = Name.new
@@ -36,6 +38,7 @@ class Censo
       query_with_city
     elsif query == 3
       @messages.message_query_selected(query)
+      query_with_frequency_name
     elsif query == 4
       puts "\n\nObrigado por utilizar a aplicação. Até a próxima\n\n"
     else
@@ -66,5 +69,12 @@ class Censo
     @messages.message_table_male_name
     @name.show(base: "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking", local: @input, gender: 'm')
     @messages.message_end_query
+  end
+
+  def query_with_frequency_name
+    puts "AVISO: Não coloque nomes compostos e nem acentos!"
+    print "Digite o/os nome(s) sem espaço e separadas por ',': "
+    @input = gets.chomp
+    @frequency_names.main("https://servicodados.ibge.gov.br/api/v2/censos/nomes/", @input)
   end
 end
