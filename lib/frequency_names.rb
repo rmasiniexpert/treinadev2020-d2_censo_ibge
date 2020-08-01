@@ -17,22 +17,22 @@ class FrequencyNames
     names = convert_names(names)
     uri = good_uri("#{base}#{names}")
     response = Faraday.get(uri)
-    response_body = JSON.parse(response.body, symbolize_names: true)
-    for i in 0..((response_body.count) -1) do
-      for j in 0..((response_body[i][:res].count) -1) do 
-        response_body[i][:res][j][:periodo] = response_body[i][:res][j][:periodo].gsub("[","")
-        response_body[i][:res][j][:periodo] = response_body[i][:res][j][:periodo].gsub("]","")
-        response_body[i][:res][j][:periodo] = response_body[i][:res][j][:periodo].gsub(",","-")
+    body = JSON.parse(response.body, symbolize_names: true)
+    for i in 0..((body.count) -1) do
+      for j in 0..((body[i][:res].count) -1) do 
+        body[i][:res][j][:periodo] = body[i][:res][j][:periodo].gsub("[","")
+        body[i][:res][j][:periodo] = body[i][:res][j][:periodo].gsub("]","")
+        body[i][:res][j][:periodo] = body[i][:res][j][:periodo].gsub(",","-")
       end
     end
-    response_body
+    body
   end
 
   def good_uri(uri)
     URI.parse(URI.encode(uri))
   end
 
-  def show_frequences(response_body)
+  def show_frequences(body)
     rows = []
     row = []
     frequence = []
@@ -42,25 +42,20 @@ class FrequencyNames
     headings = []
     header = []
     cont = 0
-    header << 'Freq. por decada'
-    for i in 0..((response_body.count) -1) do
-      header << response_body[i][:nome]
+    header << ' '
+    for i in 0..((body.count) -1) do
+      header << body[i][:nome]
       cont = 0
       for j in 0..((@years.count)-1) do
-        if @years[j] == response_body[i][:res][cont][:periodo]
-          period << response_body[i][:res][cont][:periodo]
-          frequence << response_body[i][:res][cont][:frequencia]
+        if @years[j] == body[i][:res][cont][:periodo]
+          period << body[i][:res][cont][:periodo]
+          frequence << body[i][:res][cont][:frequencia]
           cont += 1
         else
           period << @years[j]
           frequence << 0
         end
       end
-    # end
-      # for j in 0..((response_body[i][:res].count) -1) do 
-      #   period << response_body[i][:res][j][:periodo]
-      #   frequence << response_body[i][:res][j][:frequencia]
-      # end
       frequences << frequence
       frequence = []
       periods << period
@@ -71,19 +66,12 @@ class FrequencyNames
       row = []
       row << @years[i] 
       for j in 0..((periods.count)-1) do
-            row << frequences[j][i]
-        # for k in 0..((periods[j].count)-1) do
-        #   if @years[i] == periods[j][k]
-        #     row << frequences[j][k]
-        #   # else
-        #   #   row << 0
-        #   end
-        # end
+        row << frequences[j][i]
       end
       rows << row
-
     end
-    table = Terminal::Table.new(rows: rows, headings: headings)
+    table = Terminal::Table.new(title: 'Frequência de nome(s) nas décadas',
+                                headings: headings, rows: rows)
     puts table
   end
 

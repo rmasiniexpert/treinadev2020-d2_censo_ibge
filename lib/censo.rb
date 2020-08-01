@@ -72,9 +72,12 @@ class Censo
   end
 
   def query_with_frequency_name
+    puts "\n==================================================\n\n"
     puts "AVISO: Não coloque nomes compostos e nem acentos!"
-    print "Digite o/os nome(s) sem espaço e separadas por ',': "
+    print "Digite o/os nome(s) sem espaço e separadas por ',' para consultar: "
     @input = gets.chomp
+    puts "\n==================================================\n"
     @frequency_names.main("https://servicodados.ibge.gov.br/api/v2/censos/nomes/", @input)
+    @messages.message_end_query
   end
 end

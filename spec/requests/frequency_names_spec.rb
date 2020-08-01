@@ -126,54 +126,56 @@ describe FrequencyNames do
     end
   end
   
-  it 'receive one name' do
-    stub_request(:get, "#{base}joao").with(headers: headers).
-    to_return(status: 200, body: body.to_json, headers: {})
-    
-    freq = FrequencyNames.new.receive_frequences(base, 'joao')
-    
-    expect(freq[0][:res][0][:periodo]).to eq '1930'
-    expect(freq[0][:res][0][:frequencia]).to eq 60155
-    expect(freq[0][:res][-1][:periodo]).to eq '2000-2010'
-    expect(freq[0][:res][-1][:frequencia]).to eq 794118
-  end
+  context 'body content' do
+    it 'receive one name' do
+      stub_request(:get, "#{base}joao").with(headers: headers).
+      to_return(status: 200, body: body.to_json, headers: {})
+      
+      freq = FrequencyNames.new.receive_frequences(base, 'joao')
+      
+      expect(freq[0][:res][0][:periodo]).to eq '1930'
+      expect(freq[0][:res][0][:frequencia]).to eq 60155
+      expect(freq[0][:res][-1][:periodo]).to eq '2000-2010'
+      expect(freq[0][:res][-1][:frequencia]).to eq 794118
+    end
 
-  it 'receive two names' do
-    stub_request(:get, "#{base}joao%7Cmaria").with(headers: headers).
-    to_return(status: 200, body: body2.to_json, headers: {})
+    it 'receive two names' do
+      stub_request(:get, "#{base}joao%7Cmaria").with(headers: headers).
+      to_return(status: 200, body: body2.to_json, headers: {})
 
-    freq = FrequencyNames.new.receive_frequences(base, 'joao,maria')
-    
-    expect(freq[0][:res][0][:periodo]).to eq '1930'
-    expect(freq[0][:res][0][:frequencia]).to eq 60155
-    expect(freq[0][:res][-1][:periodo]).to eq '2000-2010'
-    expect(freq[0][:res][-1][:frequencia]).to eq 794118
-    expect(freq[1][:res][0][:periodo]).to eq '1930'
-    expect(freq[1][:res][0][:frequencia]).to eq 336477
-    expect(freq[1][:res][-1][:periodo]).to eq '2000-2010'
-    expect(freq[1][:res][-1][:frequencia]).to eq 1111301
-  end
+      freq = FrequencyNames.new.receive_frequences(base, 'joao,maria')
+      
+      expect(freq[0][:res][0][:periodo]).to eq '1930'
+      expect(freq[0][:res][0][:frequencia]).to eq 60155
+      expect(freq[0][:res][-1][:periodo]).to eq '2000-2010'
+      expect(freq[0][:res][-1][:frequencia]).to eq 794118
+      expect(freq[1][:res][0][:periodo]).to eq '1930'
+      expect(freq[1][:res][0][:frequencia]).to eq 336477
+      expect(freq[1][:res][-1][:periodo]).to eq '2000-2010'
+      expect(freq[1][:res][-1][:frequencia]).to eq 1111301
+    end
 
-  it 'receive three names' do
-    stub_request(:get, "#{base}gabriel%7Cmaria%7Cjoao").with(headers: headers).
-    to_return(status: 200, body: body3.to_json, headers: {})
-    
-    freq = FrequencyNames.new.receive_frequences(base, ' gábriel ,maria,joao')
+    it 'receive three names' do
+      stub_request(:get, "#{base}gabriel%7Cmaria%7Cjoao").with(headers: headers)
+          .to_return(status: 200, body: body3.to_json, headers: {})
+      
+      freq = FrequencyNames.new.receive_frequences(base, ' gábriel ,maria,joao')
 
-    expect(freq[0][:nome]).to eq 'GABRIEL'
-    expect(freq[0][:res][0][:periodo]).to eq '1930'
-    expect(freq[0][:res][0][:frequencia]).to eq 1267
-    expect(freq[0][:res][-1][:periodo]).to eq '2000-2010'
-    expect(freq[0][:res][-1][:frequencia]).to eq 584024
-    expect(freq[1][:nome]).to eq 'JOAO'
-    expect(freq[1][:res][0][:periodo]).to eq '1930'
-    expect(freq[1][:res][0][:frequencia]).to eq 60155
-    expect(freq[1][:res][-1][:periodo]).to eq '2000-2010'
-    expect(freq[1][:res][-1][:frequencia]).to eq 794118
-    expect(freq[2][:nome]).to eq 'MARIA'
-    expect(freq[2][:res][0][:periodo]).to eq '1930'
-    expect(freq[2][:res][0][:frequencia]).to eq 336477
-    expect(freq[2][:res][-1][:periodo]).to eq '2000-2010'
-    expect(freq[2][:res][-1][:frequencia]).to eq 1111301
+      expect(freq[0][:nome]).to eq 'GABRIEL'
+      expect(freq[0][:res][0][:periodo]).to eq '1930'
+      expect(freq[0][:res][0][:frequencia]).to eq 1267
+      expect(freq[0][:res][-1][:periodo]).to eq '2000-2010'
+      expect(freq[0][:res][-1][:frequencia]).to eq 584024
+      expect(freq[1][:nome]).to eq 'JOAO'
+      expect(freq[1][:res][0][:periodo]).to eq '1930'
+      expect(freq[1][:res][0][:frequencia]).to eq 60155
+      expect(freq[1][:res][-1][:periodo]).to eq '2000-2010'
+      expect(freq[1][:res][-1][:frequencia]).to eq 794118
+      expect(freq[2][:nome]).to eq 'MARIA'
+      expect(freq[2][:res][0][:periodo]).to eq '1930'
+      expect(freq[2][:res][0][:frequencia]).to eq 336477
+      expect(freq[2][:res][-1][:periodo]).to eq '2000-2010'
+      expect(freq[2][:res][-1][:frequencia]).to eq 1111301
+    end
   end
 end

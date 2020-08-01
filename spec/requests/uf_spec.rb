@@ -48,17 +48,20 @@ describe Uf do
 
     expect(uf.select_uf(response_body)[0]).to eq ('RO')
     expect(uf.select_uf(response_body)[1]).to eq (11)
-    expect{uf.select_uf(response_body)[0]}.to output(/Digite a UF que deseja buscar os nomes comuns: /).to_stdout
+    # expect{uf.select_uf(response_body)[0]}.to output(/Digite a UF que deseja buscar os nomes comuns: /).to_stdout
     expect(uf.select_uf(response_body)[1]).not_to eq (53)
     expect(uf.select_uf(response_body)[0]).not_to eq ('DF')
 
   end
 
-  it 'Receive Uf id' do
+  it 'Receive Uf and Uf id' do
     allow_any_instance_of(Uf).to receive(:gets).and_return('RO')
     stub_request(:get, base).with(headers: headers).
          to_return(status: 200, body: body.to_json, headers: {})
-
-    expect(Uf.new.select_uf_id(base)).to eq (11)
+        
+    response = Faraday.get(base)
+    response_body = JSON.parse(response.body, symbolize_names: true)
+       
+    expect(Uf.new.select_uf(response_body)).to eq (["RO", 11])
   end
 end

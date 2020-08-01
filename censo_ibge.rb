@@ -1,5 +1,5 @@
 require './lib/censo'
-class CensoRuby
+class CensoIbge
   censo = Censo.new
   censo.start
 end
