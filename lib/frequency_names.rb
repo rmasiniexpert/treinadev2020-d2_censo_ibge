@@ -35,19 +35,54 @@ class FrequencyNames
   def show_frequences(response_body)
     rows = []
     row = []
+    frequence = []
+    frequences = []
+    period = []
+    periods = []
     headings = []
     header = []
+    cont = 0
     header << 'Freq. por decada'
     for i in 0..((response_body.count) -1) do
       header << response_body[i][:nome]
-      for j in 0..((response_body[i][:res].count) -1) do 
-        row = []
-        row << response_body[i][:res][j][:periodo]
-        row << response_body[i][:res][j][:frequencia]
-        rows << row
+      cont = 0
+      for j in 0..((@years.count)-1) do
+        if @years[j] == response_body[i][:res][cont][:periodo]
+          period << response_body[i][:res][cont][:periodo]
+          frequence << response_body[i][:res][cont][:frequencia]
+          cont += 1
+        else
+          period << @years[j]
+          frequence << 0
+        end
       end
+    # end
+      # for j in 0..((response_body[i][:res].count) -1) do 
+      #   period << response_body[i][:res][j][:periodo]
+      #   frequence << response_body[i][:res][j][:frequencia]
+      # end
+      frequences << frequence
+      frequence = []
+      periods << period
+      period = []
     end
     headings <<  header
+    for i in 0..((@years.count)-1) do
+      row = []
+      row << @years[i] 
+      for j in 0..((periods.count)-1) do
+            row << frequences[j][i]
+        # for k in 0..((periods[j].count)-1) do
+        #   if @years[i] == periods[j][k]
+        #     row << frequences[j][k]
+        #   # else
+        #   #   row << 0
+        #   end
+        # end
+      end
+      rows << row
+
+    end
     table = Terminal::Table.new(rows: rows, headings: headings)
     puts table
   end
