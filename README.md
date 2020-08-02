@@ -35,19 +35,19 @@
 ## Descrição do Projeto <a name = "descricao">
 _Projeto no qual efetua buscas de nomes comuns nos estados e municípios e frequência dos nomes durante os anos._
 
-A aplicação apresenta tabelas no terminal e o fluco de consultas. No momento tem 3 tipos de consultas em que o usuário pode realizar.
+A aplicação apresenta tabelas no terminal e no momento tem 3 tipos de consultas em que o usuário pode realizar.
 
-Consulta de nomes por UF - Onde mostra 3 tabelas (tabela do ranking de nomes comuns em uma UF, tabela do ranking de nomes femininos comuns em uma UF e tabela do ranking de nomes femininos comuns em uma UF), mostrando um ranking das pessoas e da quantidade de pessoas que correspondem os nomes.
+Consulta de nomes por UF - Onde mostra 3 tabelas (tabela do ranking de nomes comuns em uma UF, tabela do ranking de nomes femininos comuns em uma UF e tabela do ranking de nomes femininos comuns em uma UF), contendo um ranking das pessoas com nomes mais comuns na UF desejada e da quantidade de pessoas que correspondem aos nomes.
 
-Consulta de nomes por municipio - Funciona parecido com a consulta de cima, porém, ao ínves de pegar os nomes na UF, pega por municípios e colocas nas 3 tabelas e rankeia.
+Consulta de nomes por municipio - Funciona parecido com a consulta de cima, porém, ao ínves de pegar os nomes na UF, pega por municípios e coloca os dados nas 3 tabelas e rankeia.
 
-Consulta por frequência dos nomes nas décadas - Nesta última, exibe apenas uma tabela e exibe o nome ou os nomes em que usuário digita e mostra a frequência de pessoas com aqueles nomes nas décadas de 1930 até 2010.
+Consulta por frequência dos nomes nas décadas - Nesta última, exibe apenas uma tabela e contém o nome ou os nomes em que usuário digita e mostra a frequência de pessoas com aqueles nomes nas décadas de 1930 até 2010.
 
 ## Motivação <a name= "motivacao">
 
-Este projeto foi desenvolvido no término do curso da terceira turma do TreinaDev, curso da Campus code. Um desafio onde pude aprender novas habilidades de organização, desáfios e de botar em prática os conhecimentos e técnicas aprendidas no curso para o desenvolvimento e aprimorar outras.
+Este projeto foi desenvolvido no término do curso da terceira turma do [TreinaDev](https://www.treinadev.com.br/), curso da [Campus code](https://www.campuscode.com.br/). Um desafio onde pude aprender novas habilidades de organização, desafios e de colocar em prática os conhecimentos e técnicas aprendidas no curso para o desenvolvimento do mesmo e aprimorar em todos os sentidos.
 
-Foi utilizado técnicas do desenvolvimento ágil, como a [tabela kanbam](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/projects/1) do próprio Github projects para organizar as tarefass de valor, com bastante TDD e gem de teste para poder guiar e orientar na programação, controle de versionamento com o git.
+Foi utilizado técnicas do desenvolvimento ágil, como a [tabela kanbam](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/projects/1) do próprio Github projects para organizar as tarefass de valor, com bastante TDD e gem de teste para poder me guiar e orientar-me na programação, controle de versionamento com o git e muito mais.
 
 O projeto está sendo um aprendizado muito grande e ainda mais!
 
@@ -58,9 +58,7 @@ Para utilizar o projeto é necessário:
   - Bundler >= 2.1.4
   - Gem >= 3.0.8
 
-
 ## Gems <a name= "gems">
-
 
 As gems utilizadas foram.
 - [Terminal-table](https://github.com/tj/terminal-table) - Utilizada para criar as tabelas no terminal.
@@ -71,6 +69,7 @@ As gems utilizadas foram.
 
 
 ## Como Usar <a name = "como_usar"></a>
+
  No terminal, clone o projeto na pasta que queira o projeto e rode o seguinte comando:
  
  ~~~ 
@@ -91,17 +90,17 @@ As gems utilizadas foram.
 
 ### Consultas <a name = "consultas"></a>
 
-A seguir, as consultas da aplicação que tem disponível ao iniciar.
+A seguir, as consultas da aplicação que tem disponível ao iniciar. A imagem a seguir mostra o início da aplicação.
 
 ![seleciona query](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/blob/master/assets/select_query.png)
 
 #### Consulta de nomes comuns por UF <a name = "consulta1"></a>
 
-A primeira consulta e para acessá-lá, necessita escolher a opção '1' na aplicação
+A primeira consulta e para acessá-lá, necessita escolher a opção '1' na aplicação.
 
 ![Tabela de UF](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/blob/master/assets/ufs.png)
 
-Depois digitar a UF que deseja mostra uma tabela com o ranking dos nomes mais comuns do estado, tabela com nomes mais comuns femininos e tabela com nomes masculinos. Conforme nas imagens abaixo.
+Depois digitar a UF que deseja mostra uma tabela com o ranking dos nomes mais comuns do estado, tabela com nomes mais comuns femininos e tabela com nomes masculinos. Conforme nas imagens abaixo de exemplo.
 
 ![Tabela 1 por UF](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/blob/master/assets/t1_query1.png)
 ![Tabela 2 por UF feminino](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/blob/master/assets/t2_query1.png)
@@ -122,11 +121,11 @@ Depois digita o número da opção da cidade que fica ao lado do nome do municí
 #### Consulta de frequência do uso dos nomes <a name = "consulta3"></a>
 
 A terceira e última consulta, para acessá-lá, necessita escolher a opção '3' na aplicação.
-Em seguida, é necessário digitar um ou mais nomes (separados por vírgulas) e exibi a frequencia do nome foi usado durante as décadas.
+Em seguida, é necessário digitar um ou mais nomes (separados por vírgulas) e exibi a frequência do nome foi usado durante as décadas.
 
 - :warning: Não pode colocar caracteres especiais e outros simbolos.
 - :warning: Não deve utilizar espaço e para separar os nomes por vírgula( , ).
-- :warning: A API de nomes, não aceita nome composta na busca.
+- :warning: A API utilizada, não aceita nome composta na busca  ignora os diácriticos do nome.
 
 ![Tabela 1 com 1 nome](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/blob/master/assets/t1_query3_one_name.png)
 ![Tabela 1 com 2 nomes](https://github.com/Guifs100/treinadev2020-d2_censo_ibge/blob/master/assets/t1_query3_two_names.png)
@@ -165,3 +164,10 @@ E tudo isso com mais testes :)
 
 
 ## Licensa <a name = "licensa"></a>
+
+ GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
